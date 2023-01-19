@@ -24,6 +24,14 @@ export default function HomePage({ userCookie }: { userCookie: Users }) {
 }
 
 export async function getServerSideProps(ctx: any) {
+  if (!ctx.req.headers.cookie) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      },
+    };
+  }
   const parsedCookies = cookie.parse(ctx.req.headers.cookie);
   const parsedUserCookie = parsedCookies.user;
 
