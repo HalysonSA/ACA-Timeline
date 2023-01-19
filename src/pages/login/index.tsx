@@ -63,7 +63,7 @@ const SignIn = () => {
 
   return (
     <div className="flex flex-row items-center justify-center min-h-screen py-8 min-w-screen bg-cyan-900 font-Roboto">
-      <div className="w-11/12 h-screen bg-white shadow-2xl md:h-screen-3/4 md:w-1/2 lg:w-1/4 rounded-xl shadow-cyan-600">
+      <div className="w-11/12 h-screen bg-white shadow-2xl min-h-minimum md:h-screen-3/4 md:w-1/2 lg:w-1/4 rounded-xl shadow-cyan-600">
         <div className="flex flex-col items-center justify-center w-full h-full px-2 text-center">
           <Image src="logo.svg" alt="Logo" width={'150'} height={'150'} />
           <h1 className="mt-4 text-2xl font-bold text-gray-800">Login</h1>
@@ -71,10 +71,7 @@ const SignIn = () => {
           <p className="mt-2 text-sm text-gray-500 w-52">
             Entre com seu usuário e senha
           </p>
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="w-full  h-1/2 mt-5"
-          >
+          <form onSubmit={handleSubmit(onSubmit)} className="w-full mt-5 h-1/2">
             <div className="flex flex-col items-center justify-center w-full gap-3 ">
               <input
                 type="text"
@@ -86,7 +83,7 @@ const SignIn = () => {
                     message: 'Endereço de email inválido',
                   },
                 })}
-                className="w-3/4 px-4 py-2 text-gray-800  bg-gray-100 rounded-lg h-9 focus:outline-none focus:ring-2 focus:ring-cyan-600 focus:border-transparent"
+                className="w-3/4 px-4 py-2 text-gray-800 bg-gray-100 rounded-lg h-9 focus:outline-none focus:ring-2 focus:ring-cyan-600 focus:border-transparent"
               />
 
               {errors.email && (
@@ -100,10 +97,10 @@ const SignIn = () => {
                   {...register('password', {
                     required: true,
                   })}
-                  className="z-10 w-11/12 px-4 py-2 h-9 text-gray-800 bg-gray-100 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-cyan-600 focus:border-transparent"
+                  className="z-10 w-11/12 px-4 py-2 text-gray-800 bg-gray-100 rounded-l-lg h-9 focus:outline-none focus:ring-2 focus:ring-cyan-600 focus:border-transparent"
                 />
                 <button
-                  className="p-2 m-0 bg-gray-100 rounded-r-lg h-9 outline-none text-cyan-600 hover:text-cyan-700 "
+                  className="p-2 m-0 bg-gray-100 rounded-r-lg outline-none h-9 text-cyan-600 hover:text-cyan-700 "
                   onMouseDown={() => handleShowPassword()}
                 >
                   {showPassword ? (
