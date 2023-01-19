@@ -15,6 +15,5 @@ export type Users = {
   street_name: string;
   street_number: string;
   complement: string;
-  is_admin: boolean;
-  is_emp: boolean;
+  role:string;
 };
