@@ -1,4 +1,4 @@
-export type Users = {
+export type User = {
   id: number;
   username: string;
   name: string;
@@ -15,5 +15,5 @@ export type Users = {
   street_name: string;
   street_number: string;
   complement: string;
-  role:string;
+  role: string;
 };

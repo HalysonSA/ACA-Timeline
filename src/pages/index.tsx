@@ -1,9 +1,9 @@
-import { Users } from '@/types/users';
+import { User } from '@/types/users';
 import cookie from 'cookie';
 import { useRouter } from 'next/router';
 import { useCookies } from 'react-cookie';
 
-export default function HomePage({ userCookie }: { userCookie: Users }) {
+export default function HomePage({ userCookie }: { userCookie: User }) {
   const router = useRouter();
 
   const [cookies, setCookie, removeCookie] = useCookies(['user']);
