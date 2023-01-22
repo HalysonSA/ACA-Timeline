@@ -3,6 +3,7 @@ import { InputsRegister } from '../../types/hookForm';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { supabase } from '@/lib/supabaseClient';
+import InputMask from 'react-input-mask';
 
 export default function SignUpForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -131,7 +132,8 @@ export default function SignUpForm() {
         )}
         <div className="flex flex-col w-full border-b border-cyan-600  gap-y-1.5 ">
           <label className="text-white">CPF</label>
-          <input
+          <InputMask
+            mask="999.999.999-99"
             type="text"
             className="h-10 px-2 bg-gray-100 focus:outline-none"
             {...register('CPF', {
@@ -148,7 +150,8 @@ export default function SignUpForm() {
         )}
         <div className="flex flex-col w-full border-b border-cyan-600  gap-y-1.5 ">
           <label className="text-white">Número de telefone</label>
-          <input
+          <InputMask
+            mask="(99) 99999-9999"
             type="tel"
             className="h-10 px-2 bg-gray-100 focus:outline-none"
             {...register('phone_number', {
@@ -230,7 +233,7 @@ export default function SignUpForm() {
 
         <button
           type="submit"
-          className="flex items-center justify-center w-full h-12 text-xl transition-all bg-gray-100 text-cyan-600 hover:bg-gray-200 "
+          className="flex items-center justify-center w-full h-12 text-xl transition-all border border-white  text-white hover:bg-cyan-700 "
         >
           Salvar
         </button>
