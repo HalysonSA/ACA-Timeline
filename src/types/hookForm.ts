@@ -8,6 +8,7 @@ export type InputsRegister = {
   password: string;
   passwordConfirm: string;
   name: string;
-  CPF: string;
+  username: string;
+  cpf: string;
   phone_number: string;
 };

@@ -4,6 +4,8 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { supabase } from '@/lib/supabaseClient';
 import InputMask from 'react-input-mask';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function SignUpForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -13,6 +15,7 @@ export default function SignUpForm() {
   };
 
   const {
+    reset,
     register,
     handleSubmit,
     clearErrors,
@@ -32,7 +35,7 @@ export default function SignUpForm() {
             break;
           case 'CPF':
             setTimeout(() => {
-              clearErrors('CPF');
+              clearErrors('cpf');
             }, 5000);
             break;
           case 'phone_number':
@@ -64,41 +67,52 @@ export default function SignUpForm() {
     errors.email,
     errors.password,
     errors.name,
-    errors.CPF,
+    errors.cpf,
     errors.phone_number,
     errors.passwordConfirm,
   ]);
 
   const onSubmit: SubmitHandler<InputsRegister> = async ({
     name,
-    CPF,
+    cpf,
     phone_number,
     email,
     password,
   }) => {
-    //Insert in supabase
+    const username = name.split(' ')[0];
+
     const { data, error } = await supabase
       .from('users')
-      .insert([
-        {
-          name: name,
-          cpf: CPF,
-          phone_number: phone_number,
-          email: email,
-          password: password,
-        },
-      ])
-      .single();
+      .select('email')
+      .eq('email', email);
 
     if (data) {
-      console.log(data);
-    } else {
-      console.log(error);
+      if (data.length > 0) {
+        toast.error('Email já cadastrado');
+      } else {
+        const { error } = await supabase.from('users').insert([
+          {
+            username,
+            name,
+            cpf,
+            phone_number,
+            email,
+            password,
+          },
+        ]);
+        if (error) {
+          toast.error('Erro ao cadastrar usuário');
+        } else {
+          toast.success('Usuário cadastrado com sucesso');
+          reset();
+        }
+      }
     }
   };
 
   return (
     <div className="flex flex-col items-center w-full h-full mb-20 gap-y-10">
+      <ToastContainer />
       <div className="w-1/2 mt-32">
         <div className="flex flex-col text-5xl text-center text-white ">
           <label>
@@ -136,7 +150,7 @@ export default function SignUpForm() {
             mask="999.999.999-99"
             type="text"
             className="h-10 px-2 bg-gray-100 focus:outline-none"
-            {...register('CPF', {
+            {...register('cpf', {
               required: true,
               pattern: {
                 value: /^[0-9]{3}\.[0-9]{3}\.[0-9]{3}\-[0-9]{2}$/,
@@ -145,8 +159,8 @@ export default function SignUpForm() {
             })}
           />
         </div>
-        {errors.CPF && (
-          <span className="text-red-500">{errors.CPF.message}</span>
+        {errors.cpf && (
+          <span className="text-red-500">{errors.cpf.message}</span>
         )}
         <div className="flex flex-col w-full border-b border-cyan-600  gap-y-1.5 ">
           <label className="text-white">Número de telefone</label>
