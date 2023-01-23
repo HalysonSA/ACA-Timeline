@@ -145,7 +145,7 @@ export default function SignInForm() {
         )}
 
         <div className="flex flex-row items-center justify-between text-sm flex-wrap gap-y-2">
-          <div className="flex flex-row items-center gap-x-1.5">
+          <div className="flex flex-row items-center gap-x-1.5 pr-10">
             <input
               type="checkbox"
               onClick={() => {

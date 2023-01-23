@@ -6,6 +6,7 @@ import { supabase } from '@/lib/supabaseClient';
 import InputMask from 'react-input-mask';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ValidateCPF from '@/utils/verifyCpf';
 
 export default function SignUpForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -78,6 +79,7 @@ export default function SignUpForm() {
     phone_number,
     email,
     password,
+    passwordConfirm,
   }) => {
     const username = name.split(' ')[0];
 
@@ -86,9 +88,15 @@ export default function SignUpForm() {
       .select('email')
       .eq('email', email);
 
+    const isCpfValid = ValidateCPF(cpf);
+
     if (data) {
       if (data.length > 0) {
         toast.error('Email já cadastrado');
+      } else if (password !== passwordConfirm) {
+        toast.error('Senhas não conferem');
+      } else if (!isCpfValid) {
+        toast.error('CPF inválido');
       } else {
         const { error } = await supabase.from('users').insert([
           {
@@ -105,7 +113,9 @@ export default function SignUpForm() {
         } else {
           toast.success('Usuário cadastrado com sucesso');
           reset();
-          window.location.href = '/login';
+          setTimeout(() => {
+            window.location.href = '/login';
+          }, 3000);
         }
       }
     }
