@@ -7,11 +7,14 @@ import { supabase } from '@/lib/supabaseClient';
 import { User } from '@/types/users';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { RiAccountCircleFill } from 'react-icons/ri';
+import { useMediaQuery } from '@chakra-ui/react';
 
 export default function SignInForm() {
   const [rememberMe, setRememberMe] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [findedUser, setFindedUser] = useState<undefined | string>('na');
+
+  const [isLargerThan768] = useMediaQuery('(min-width: 768px)');
 
   const [cookies, setCookie] = useCookies(['user']);
 
@@ -125,7 +128,7 @@ export default function SignInForm() {
               })}
             />
             <button
-              className="flex items-center justify-center w-1/12 bg-gray-100 cursor-pointer focus:outline-none"
+              className="flex items-center justify-center w-12 bg-gray-100 cursor-pointer focus:outline-none"
               onMouseDown={handleShowPassword}
             >
               {showPassword ? (
@@ -141,7 +144,7 @@ export default function SignInForm() {
           <span className="text-red-500">{errors.password.message}</span>
         )}
 
-        <div className="flex flex-row items-center justify-between text-sm">
+        <div className="flex flex-row items-center justify-between text-sm flex-wrap gap-y-2">
           <div className="flex flex-row items-center gap-x-1.5">
             <input
               type="checkbox"
@@ -165,6 +168,21 @@ export default function SignInForm() {
         </button>
         {findedUser === undefined && (
           <span className="text-red-500">Usuário ou senha incorretos </span>
+        )}
+        {!isLargerThan768 && (
+          <>
+            <div className="flex flex-row items-center justify-center">
+              <hr className="h-2 w-28" />
+              <label className="mx-4 -translate-y-1">Ou</label>
+              <hr className="h-2 w-28" />
+            </div>
+            <button
+              onClick={() => router.push('/login/signup')}
+              className="flex items-center justify-center w-full h-12 text-xl transition-all border border-cyan-600 text-cyan-600 hover:bg-cyan-50 "
+            >
+              Cadastre-se
+            </button>
+          </>
         )}
       </form>
     </div>
