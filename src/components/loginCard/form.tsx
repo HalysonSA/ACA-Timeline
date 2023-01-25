@@ -88,7 +88,7 @@ export default function SignInForm() {
   };
 
   return (
-    <div className="flex flex-col w-4/5 bg-white">
+    <div className="flex flex-col w-4/5 max-w-max">
       <div className="flex items-center justify-center my-16">
         <RiAccountCircleFill size={150} fill="#0891b2" />
       </div>

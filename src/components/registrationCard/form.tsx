@@ -122,9 +122,9 @@ export default function SignUpForm() {
   };
 
   return (
-    <div className="flex flex-col items-center w-full h-full mb-20 gap-y-10">
+    <div className="flex flex-col items-center w-full h-full mb-20 gap-y-10 ">
       <ToastContainer />
-      <div className="w-full mt-12 md:w-2/3 lg:1/2 md:mt-32">
+      <div className="w-full mt-12 md:w-2/3 lg:1/2 md:mt-32  ">
         <div className="flex flex-col text-5xl text-center text-white ">
           <label>
             <h1>Ainda não tem conta?</h1>
@@ -136,7 +136,7 @@ export default function SignUpForm() {
       </div>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col w-11/12 md:w-3/6  gap-y-4"
+        className="flex flex-col w-11/12 md:w-3/6  gap-y-4 max-w-max"
       >
         <div className="flex flex-col w-full border-b border-cyan-600  gap-y-1.5 ">
           <label className="text-white">Nome completo</label>

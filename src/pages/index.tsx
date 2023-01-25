@@ -1,24 +1,13 @@
+import Footer from '@/components/home/footer/footer';
+import Navbar from '@/components/home/navbar/navbar';
 import { User } from '@/types/users';
 import cookie from 'cookie';
-import { useRouter } from 'next/router';
-import { useCookies } from 'react-cookie';
 
 export default function HomePage({ userCookie }: { userCookie: User }) {
-  const router = useRouter();
-
-  const [cookies, setCookie, removeCookie] = useCookies(['user']);
-
   return (
-    <div>
-      <h1>Olá {userCookie.username}</h1>
-      <button
-        onClick={() => {
-          removeCookie('user');
-          router.push('/login');
-        }}
-      >
-        Sair
-      </button>
+    <div className="min-w-screen min-h-screen bg-cyan-50">
+      <Navbar username={userCookie.username} />
+      <Footer />
     </div>
   );
 }
