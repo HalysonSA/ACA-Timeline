@@ -2,8 +2,13 @@ import { useRouter } from 'next/router';
 import { useCookies } from 'react-cookie';
 import { RiLogoutCircleRLine } from 'react-icons/ri';
 import { FaUserCircle } from 'react-icons/fa';
-export default function Navbar(username: { username: string }) {
+import { useSelector } from 'react-redux';
+import RootState from '@/types/reduxsStates';
+
+export default function Navbar() {
   const router = useRouter();
+
+  const user = useSelector((state: RootState) => state.user);
 
   const [cookies, setCookie, removeCookie] = useCookies(['user']);
 
@@ -15,7 +20,7 @@ export default function Navbar(username: { username: string }) {
           <span className="flex flex-row gap-2">
             <FaUserCircle size={24} />
             <label>
-              <b>Olá,</b> {username.username}
+              <b>Olá,</b> {user.username}
             </label>
           </span>
           <button
