@@ -14,6 +14,7 @@ module.exports = {
       },
       maxWidth: {
         'max': '34rem',
+        'table': '570px'
       },
       minWidth: {
         'min': '90%',

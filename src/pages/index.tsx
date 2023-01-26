@@ -1,9 +1,9 @@
 import Footer from '@/components/home/footer/footer';
 import Navbar from '@/components/home/navbar/navbar';
+import SampleSchedules from '@/components/home/sampleSchedules';
 import { checkUserState } from '@/redux/userSlice';
 import { User } from '@/types/users';
 import cookie from 'cookie';
-import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 export default function HomePage({ userCookie }: { userCookie: User }) {
@@ -14,7 +14,7 @@ export default function HomePage({ userCookie }: { userCookie: User }) {
   return (
     <div className="min-w-screen min-h-screen bg-cyan-50">
       <Navbar />
-
+      <SampleSchedules />
       <Footer />
     </div>
   );

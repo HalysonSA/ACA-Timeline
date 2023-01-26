@@ -1,4 +1,8 @@
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 
 * {
   box-sizing: border-box;
@@ -19,6 +23,17 @@ a {
   text-decoration: none;
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@layer components {
+  .th-theme {
+    @apply border border-gray-700 bg-neutral-100 w-24 px-4 py-1 text-center ;
+  }
+  .td-open-theme {
+    @apply  border  bg-emerald-700;
+  }
+  .td-close-theme{
+    @apply  border bg-red-300 ;
+  }
+  .subtitle {
+    @apply text-white text-sm;
+  }
+}
