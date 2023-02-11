@@ -25,15 +25,13 @@ a {
 
 @layer components {
   .th-theme {
-    @apply border border-gray-700 bg-neutral-100 w-24 px-4 py-1 text-center ;
+    @apply border border-black bg-white px-4   py-1 w-48 text-center uppercase ;
   }
-  .td-open-theme {
-    @apply  border  bg-emerald-700;
+  .td-theme {
+    @apply border border-black bg-white   py-1 w-48 text-center uppercase ;
   }
-  .td-close-theme{
-    @apply  border bg-red-300 ;
+  .btn-calendar {
+    @apply flex items-center gap-2 rounded-lg  bg-cyan-800 text-white  p-2 uppercase hover:bg-cyan-900 ;
   }
-  .subtitle {
-    @apply text-white text-sm;
-  }
+ 
 }

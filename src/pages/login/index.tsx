@@ -16,7 +16,7 @@ const SignIn = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col justify-center items-center  w-full h-full min-h-screen">
+      <div className="flex flex-col justify-center items-center  md:w-full h-full min-h-screen">
         {isLargerThan768 && <SignUpForm />}
       </div>
     </div>

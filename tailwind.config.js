@@ -14,7 +14,7 @@ module.exports = {
       },
       maxWidth: {
         'max': '34rem',
-        'table': '570px'
+        'calendar': '600px'
       },
       minWidth: {
         'min': '90%',

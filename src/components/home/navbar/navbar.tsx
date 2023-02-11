@@ -3,7 +3,7 @@ import { useCookies } from 'react-cookie';
 import { RiLogoutCircleRLine } from 'react-icons/ri';
 import { FaUserCircle } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
-import RootState from '@/types/reduxsStates';
+import RootState from '@/types/reduxStates';
 
 export default function Navbar() {
   const router = useRouter();

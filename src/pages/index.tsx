@@ -1,6 +1,6 @@
+import CalendarCheck from '@/components/calendar';
 import Footer from '@/components/home/footer/footer';
 import Navbar from '@/components/home/navbar/navbar';
-import SampleSchedules from '@/components/home/sampleSchedules';
 import { checkUserState } from '@/redux/userSlice';
 import { User } from '@/types/users';
 import cookie from 'cookie';
@@ -12,9 +12,13 @@ export default function HomePage({ userCookie }: { userCookie: User }) {
   dispatch(checkUserState(userCookie));
 
   return (
-    <div className="min-w-screen min-h-screen bg-cyan-50">
+    <div className="min-w-screen min-h-screen bg-teal-50">
       <Navbar />
-      <SampleSchedules />
+      <div className="min-h-screen w-screen flex flex-col  items-center">
+        <div className="overflow-x-auto max-w-calendar  w-full h-auto select-none mt-20 ">
+          <CalendarCheck />
+        </div>
+      </div>
       <Footer />
     </div>
   );

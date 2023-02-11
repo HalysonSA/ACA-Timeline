@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="fixed w-full bottom-0 select-none">
+    <footer className=" w-full bottom-0 select-none ">
       <div className="w-full h-7 bg-cyan-600 rounded-t-lg"></div>
       <div className="w-full h-12 bg-cyan-700"></div>
       <div className="w-full h-32 bg-cyan-800 flex  items-center justify-center">
