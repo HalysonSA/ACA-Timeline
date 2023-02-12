@@ -38,33 +38,35 @@ const SchedulesToday = () => {
         const dateFormated = moment(date).format('DD/MM/YYYY');
         return (
           <div
-            className={` flex justify-between my-2 px-10 py-4 rounded-xl 
+            className={` flex justify-between flex-wrap-reverse my-2 px-10 rounded-xl 
             
             ${status == 'available' ? 'bg-cyan-500' : 'bg-red-400'}
             bg-cyan-500  font-medium`}
             key={schedule.id}
           >
-            <div className="flex flex-row gap-x-1">
+            <div className="flex flex-row gap-x-1 p-3">
               <MdTimer size={24} />
               <p>{time}</p>
             </div>
-            <p>{dateFormated}</p>
-            <p>{status == 'available' ? 'Disponível' : 'Reservado'}</p>
+            <p className="p-3">{dateFormated}</p>
+            <p className="p-3">
+              {status == 'available' ? 'Disponível' : 'Reservado'}
+            </p>
           </div>
         );
       })}
       {freeSchedules.map((time) => {
         return (
           <div
-            className="flex justify-between my-2 px-10 py-4 rounded-xl bg-cyan-500  font-medium"
+            className="flex justify-between flex-wrap-reverse my-2 px-10  rounded-xl bg-cyan-500  font-medium"
             key={time}
           >
-            <div className="flex flex-row gap-x-1">
+            <div className="flex flex-row gap-x-1 p-3">
               <MdTimer size={24} />
               <p>{time}</p>
             </div>
-            <p>{date}</p>
-            <p>Disponível</p>
+            <p className="p-3">{date}</p>
+            <p className="p-3">Disponível</p>
           </div>
         );
       })}
