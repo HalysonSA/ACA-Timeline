@@ -1,6 +1,11 @@
+import { supabase } from '@/lib/supabaseClient';
+import { setScheduling } from '@/redux/schedulingSlice';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { FiArrowRight, FiArrowLeft } from 'react-icons/fi';
+import { useDispatch } from 'react-redux';
+import { Scheduling } from '@/types/scheduling';
+import { useCookies } from 'react-cookie';
 
 interface Month {
   id: number;
@@ -14,9 +19,13 @@ const CalendarCheck = () => {
     weekdaysShort: 'Dom_Seg_Ter_Qua_Qui_Sex_Sáb'.split('_'),
   });
 
+  const dispatch = useDispatch();
+
   const [month, setMonth] = useState<Month>({} as Month);
+  const [cookies, setCookie] = useCookies(['date']);
 
   const currentMonth = moment().month();
+  const currentYear = moment().year();
 
   const months = [
     { id: 0, name: 'Janeiro', days: 31 },
@@ -54,15 +63,30 @@ const CalendarCheck = () => {
     },
   ];
 
-  //   function getApointments(day: number) {
-  //     const appointments = schedules.filter(
-  //       (schedule) => schedule.day === day && schedule.month === month.id
-  //     );
-  //   }
+  async function getApointments(day: number) {
+    const realMonth = month.id + 1; //turns the month id into a real number
+
+    var date = currentYear + '-' + realMonth + '-' + day;
+
+    if (realMonth.toString().length === 1) {
+      date = currentYear + '-0' + realMonth + '-' + day;
+    }
+
+    setCookie('date', date, { path: '/' });
+
+    const {
+      data,
+      error,
+    }: {
+      data: Scheduling[] | null;
+      error: any;
+    } = await supabase.from('schedules').select().eq('date', date);
+
+    dispatch(setScheduling(data));
+  }
 
   return (
     <div className=" flex flex-col gap-5 p-2 bg-cyan-700 rounded-md ">
-      <div className="text-white">{moment().format('llll')}</div>
       <div className="flex flex-col gap-3 text-gray-800">
         <h1 className="text-2xl  font-bold bg-cyan-900 p-2 text-white text-center">
           {month.name}
@@ -74,7 +98,7 @@ const CalendarCheck = () => {
                 key={day}
                 className="bg-white font-bold  flex justify-center rounded-md p-2 hover:bg-neutral-200"
                 onClick={() => {
-                  //getApointments(day);
+                  getApointments(day);
                 }}
               >
                 {day}

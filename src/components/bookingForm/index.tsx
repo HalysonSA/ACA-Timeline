@@ -27,7 +27,7 @@ export default function BookingForm() {
         service_id: 1,
         date: date,
         time: time,
-        status: 'brooked',
+        status: 'booked',
       },
     ]);
   }

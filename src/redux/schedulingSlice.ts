@@ -2,20 +2,15 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { Scheduling } from '../types/scheduling';
 
-interface SchedulingState {
-  scheduling: Scheduling[];
-}
-
-const initialState: SchedulingState = {
-  scheduling: [],
-};
-
 export const schedulingSlice = createSlice({
   name: 'scheduling',
-  initialState,
+  initialState: [] as Scheduling[],
   reducers: {
-    setScheduling: (state, action: PayloadAction<Scheduling[]>) => {
-      state.scheduling = action.payload;
+    setScheduling: (state, action: PayloadAction<Scheduling[] | null>) => {
+      if (action.payload) {
+        return action.payload;
+      }
+      return [];
     },
   },
 });
