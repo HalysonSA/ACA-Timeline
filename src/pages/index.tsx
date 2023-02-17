@@ -6,6 +6,7 @@ import { checkUserState } from '@/redux/userSlice';
 import { User } from '@/types/users';
 import cookie from 'cookie';
 import { useDispatch } from 'react-redux';
+import BookingForm from '@/components/bookingForm';
 
 export default function HomePage({ userCookie }: { userCookie: User }) {
   const dispatch = useDispatch();
@@ -15,10 +16,11 @@ export default function HomePage({ userCookie }: { userCookie: User }) {
   return (
     <div className="min-w-screen min-h-screen bg-teal-50">
       <Navbar />
-      <div className="min-h-screen w-screen flex flex-col  items-center">
-        <div className="overflow-x-auto max-w-calendar flex flex-col gap-8  w-full h-auto select-none mt-20 ">
+      <div className="md:min-h-screen w-screen flex flex-col  items-center">
+        <div className="overflow-x-auto max-w-calendar flex flex-col gap-8 min-h-screen  w-full h-auto select-none mt-20 ">
           <CalendarCheck />
           <SchedulesToday />
+          <BookingForm />
         </div>
       </div>
       <Footer />

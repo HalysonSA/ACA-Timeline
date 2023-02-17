@@ -3,6 +3,11 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import RootState from '@/types/reduxStates';
 import moment from 'moment';
+import VerifyWeekend from '@/utils/verifyWeekend';
+import VerifySchedules from '@/utils/verifySchedules';
+
+import 'react-toastify/dist/ReactToastify.css';
+import { toast, ToastContainer } from 'react-toastify';
 
 export default function BookingForm() {
   const user = useSelector((state: RootState) => state.user);
@@ -21,15 +26,26 @@ export default function BookingForm() {
   } = useForm<Inputs>();
 
   async function createSchedule(date: string, time: string, service: string) {
-    const { data, error } = await supabase.from('schedules').insert([
-      {
-        user_id: user.id,
-        service_id: 1,
-        date: date,
-        time: time,
-        status: 'booked',
-      },
-    ]);
+    const isWeekend = VerifyWeekend(date);
+    const isAvailable = await VerifySchedules(date, time);
+
+    if (!isWeekend && isAvailable) {
+      const { data, error } = await supabase.from('schedules').insert([
+        {
+          user_id: user.id,
+          service_id: service,
+          date: date,
+          time: time,
+          status: 'booked',
+        },
+      ]);
+      toast.success('Agendamento feito com sucesso');
+      if (error) {
+        toast.error('Ocorreu um erro ao criar o agendamento');
+      }
+    } else {
+      toast.error('Horário indisponível');
+    }
   }
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
@@ -39,6 +55,7 @@ export default function BookingForm() {
 
   return (
     <div>
+      <ToastContainer />
       <h1>Booking Form</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <input

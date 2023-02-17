@@ -6,6 +6,8 @@ import { FiArrowRight, FiArrowLeft } from 'react-icons/fi';
 import { useDispatch } from 'react-redux';
 import { Scheduling } from '@/types/scheduling';
 import { useCookies } from 'react-cookie';
+import { setWeekend } from '@/redux/weekendSlice';
+import VerifyWeekend from '@/utils/verifyWeekend';
 
 interface Month {
   id: number;
@@ -46,23 +48,6 @@ const CalendarCheck = () => {
     setMonth(months[currentMonth]);
   }, []);
 
-  const schedules = [
-    {
-      day: 17,
-      month: 1,
-      hour: '7:30',
-      customer: 'João',
-      status: 'available',
-    },
-    {
-      day: 18,
-      month: 1,
-      hour: '8:10',
-      customer: 'Hally',
-      status: 'available',
-    },
-  ];
-
   async function getApointments(day: number) {
     const realMonth = month.id + 1; //turns the month id into a real number
 
@@ -71,8 +56,11 @@ const CalendarCheck = () => {
     if (realMonth.toString().length === 1) {
       date = currentYear + '-0' + realMonth + '-' + day;
     }
-
     setCookie('date', date, { path: '/' });
+
+    VerifyWeekend(date)
+      ? dispatch(setWeekend(true))
+      : dispatch(setWeekend(false));
 
     const {
       data,
@@ -86,7 +74,7 @@ const CalendarCheck = () => {
   }
 
   return (
-    <div className=" flex flex-col gap-5 p-2 bg-cyan-700 rounded-md ">
+    <div className=" flex flex-col gap-5 p-2 bg-cyan-700 rounded-md mx-2">
       <div className="flex flex-col gap-3 text-gray-800">
         <h1 className="text-2xl  font-bold bg-cyan-900 p-2 text-white text-center">
           {month.name}
