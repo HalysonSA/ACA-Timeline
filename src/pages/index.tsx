@@ -7,6 +7,7 @@ import { User } from '@/types/users';
 import cookie from 'cookie';
 import { useDispatch } from 'react-redux';
 import BookingForm from '@/components/bookingForm';
+import MySchedules from '@/components/mySchedules';
 
 export default function HomePage({ userCookie }: { userCookie: User }) {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ export default function HomePage({ userCookie }: { userCookie: User }) {
           <CalendarCheck />
           <SchedulesToday />
           <BookingForm />
+          <MySchedules />
         </div>
       </div>
       <Footer />

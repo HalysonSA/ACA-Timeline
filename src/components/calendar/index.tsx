@@ -16,7 +16,7 @@ interface Month {
 }
 
 const CalendarCheck = () => {
-  moment.defineLocale('pt-br', {
+  moment.updateLocale('pt-br', {
     monthsShort: 'Jan_Fev_Mar_Abr_Mai_Jun_Jul_Ago_Set_Out_Nov_Dez'.split('_'),
     weekdaysShort: 'Dom_Seg_Ter_Qua_Qui_Sex_Sáb'.split('_'),
   });

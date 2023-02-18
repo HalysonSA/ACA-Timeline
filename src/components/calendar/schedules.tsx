@@ -42,7 +42,7 @@ const SchedulesToday = () => {
         const dateFormated = moment(date).format('DD/MM/YYYY');
         return (
           <div
-            className={` flex justify-between flex-wrap-reverse my-2 px-10 rounded-xl 
+            className={` flex justify-between flex-wrap-reverse my-2 px-10 rounded-xl  cursor-pointer
             
             ${
               status == 'available'
