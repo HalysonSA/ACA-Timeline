@@ -15,6 +15,7 @@ module.exports = {
       minHeight: {
         'min': '54rem',
         
+        'screen-3/4': '75vh',
         'calendar' : '500px'
       },
       maxHeight: {
@@ -25,14 +26,16 @@ module.exports = {
       },
       minWidth: {
         'min': '90%',
+
       },
       width: {
-        
+          'modal':'480px',
         'calendar': '700px'
       },
       height: {
         'screen/2': '50vh',
         'screen-3/4': '75vh',
+        'modal':'740px',
       },
       fontFamily:{
         'Roboto': ['Roboto', 'sans-serif'],

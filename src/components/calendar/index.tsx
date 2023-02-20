@@ -9,6 +9,7 @@ import { useCookies } from 'react-cookie';
 import { setWeekend } from '@/redux/weekendSlice';
 import VerifyWeekend from '@/utils/verifyWeekend';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
+import { setModalState } from '@/redux/modalControlsSlice';
 
 interface Month {
   id: number;
@@ -121,6 +122,12 @@ const CalendarCheck = () => {
                 className="flex items-center justify-center w-12 h-12 text-3xl font-medium bg-white border border-gray-200 md:w-16 md:h-16 hover:drop-shadow-xl"
                 onClick={() => {
                   getApointments(day);
+                  dispatch(
+                    setModalState({
+                      isModalOpen: true,
+                      modalType: 'scheduleSchedules',
+                    })
+                  );
                 }}
               >
                 {day}

@@ -25,13 +25,17 @@ a {
 
 @layer components {
   .th-theme {
-    @apply border border-black bg-white px-4   py-1 w-48 text-center uppercase ;
+    @apply w-48 px-4 py-1 text-center uppercase bg-white border border-black ;
   }
   .td-theme {
-    @apply border border-black bg-white   py-1 w-48 text-center uppercase ;
+    @apply w-48 py-1 text-center uppercase bg-white border border-black ;
   }
   .btn-calendar {
-    @apply flex items-center gap-2 rounded-lg  bg-cyan-800 text-white  p-2 uppercase hover:bg-cyan-900 ;
+    @apply flex items-center gap-2 p-2 text-white uppercase rounded-lg bg-cyan-800 hover:bg-cyan-900 ;
+  }
+
+  .modal-size{
+    @apply md:w-modal md:h-modal bg-white rounded-3xl
   }
  
 }

@@ -1,13 +1,13 @@
 import CalendarCheck from '@/components/calendar';
-import SchedulesToday from '@/components/calendar/schedules';
 import Footer from '@/components/home/footer/footer';
 import Navbar from '@/components/home/navbar/navbar';
+import ModalScheduleCreation from '@/components/modals/modalScheduleCreation';
+import ModalSchedules from '@/components/modals/modalSchedules';
+import { setModalState } from '@/redux/modalControlsSlice';
 import { checkUserState } from '@/redux/userSlice';
 import { User } from '@/types/users';
 import cookie from 'cookie';
 import { useDispatch } from 'react-redux';
-import BookingForm from '@/components/bookingForm';
-import MySchedules from '@/components/mySchedules';
 
 export default function HomePage({ userCookie }: { userCookie: User }) {
   const dispatch = useDispatch();
@@ -17,15 +17,23 @@ export default function HomePage({ userCookie }: { userCookie: User }) {
   return (
     <div className="min-h-screen select-none min-w-screen bg-cyan-900">
       <Navbar />
-      <div className="flex flex-col items-center justify-center min-h-screen ">
+      <div className="flex flex-col items-center justify-center min-h-screen-3/4">
         <CalendarCheck />
-        <button className="h-16 p-3 my-8 text-xl font-medium bg-white rounded-full w-72 drop-shadow-home hover:bg-neutral-100">
+        <button
+          onClick={() => {
+            dispatch(
+              setModalState({
+                isModalOpen: true,
+                modalType: 'scheduleCreation',
+              })
+            );
+          }}
+          className="h-16 p-3 my-8 text-xl font-medium bg-white rounded-full w-72 drop-shadow-home hover:bg-neutral-100"
+        >
           Fazer Agendamento
         </button>
-        {/* 
-        <SchedulesToday />
-        <BookingForm />
-        <MySchedules /> */}
+        <ModalScheduleCreation />
+        <ModalSchedules />
       </div>
       <Footer />
     </div>

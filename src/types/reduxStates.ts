@@ -5,4 +5,8 @@ export default interface RootState {
   user: User;
   schedules: Scheduling[];
   isWeekend: boolean;
+  isModalOpen: {
+    isModalOpen: boolean;
+    modalType: string;
+  };
 }
