@@ -2,12 +2,13 @@ import { supabase } from '@/lib/supabaseClient';
 import { setScheduling } from '@/redux/schedulingSlice';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
-import { FiArrowRight, FiArrowLeft } from 'react-icons/fi';
+import { GiClick } from 'react-icons/gi';
 import { useDispatch } from 'react-redux';
 import { Scheduling } from '@/types/scheduling';
 import { useCookies } from 'react-cookie';
 import { setWeekend } from '@/redux/weekendSlice';
 import VerifyWeekend from '@/utils/verifyWeekend';
+import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 
 interface Month {
   id: number;
@@ -72,19 +73,52 @@ const CalendarCheck = () => {
 
     dispatch(setScheduling(data));
   }
-
+  console.log(months[11]);
   return (
-    <div className=" flex flex-col gap-5 p-2 bg-cyan-700 rounded-md mx-2">
-      <div className="flex flex-col gap-3 text-gray-800">
-        <h1 className="text-2xl  font-bold bg-cyan-900 p-2 text-white text-center">
-          {month.name}
-        </h1>
-        <div className="grid grid-cols-7 gap-2 w-full ">
+    <div className="flex justify-center overflow-auto bg-white md:w-calendar min-h-calendar rounded-3xl">
+      <div className="flex flex-col">
+        <div className="flex flex-row items-center justify-between">
+          <div className="flex flex-row items-center gap-2 my-7">
+            <button
+              onClick={() => {
+                if (month.id == 0) {
+                  setMonth(months[11]);
+                } else {
+                  setMonth(months[month.id - 1]);
+                }
+              }}
+            >
+              <MdKeyboardArrowLeft size={30} className="bg-white " />
+            </button>
+
+            <h1 className="text-3xl font-bold bg-white select-none">
+              {month.name}
+            </h1>
+            <button
+              onClick={() => {
+                if (month.id == 11) {
+                  setMonth(months[0]);
+                } else {
+                  setMonth(months[month.id + 1]);
+                }
+              }}
+            >
+              <MdKeyboardArrowRight size={30} className="bg-white " />
+            </button>
+          </div>
+          <div className="flex flex-row items-center gap-1">
+            <GiClick size={24} className="rotate-30 " />
+            <p className="font-light ">
+              clique sobre o dia para ver os horários
+            </p>
+          </div>
+        </div>
+        <div className="grid w-full grid-cols-7 gap-6">
           {Array.from({ length: month.days }, (_, i) => i + 1).map((day) => {
             return (
               <button
                 key={day}
-                className="bg-white font-bold  flex justify-center rounded-md p-2 hover:bg-neutral-200"
+                className="flex items-center justify-center w-12 h-12 text-3xl font-medium bg-white border border-gray-200 md:w-16 md:h-16 hover:drop-shadow-xl"
                 onClick={() => {
                   getApointments(day);
                 }}
@@ -94,30 +128,11 @@ const CalendarCheck = () => {
             );
           })}
         </div>
-      </div>
-      <div className="flex flex-row items-center justify-between full">
-        {month.id <= currentMonth ? null : (
-          <button
-            className="btn-calendar"
-            onClick={() => {
-              setMonth(months[month.id - 1]);
-            }}
-          >
-            <FiArrowLeft />
-            <p>Anterior</p>
-          </button>
-        )}
-        {month.id === 11 ? null : (
-          <button
-            className="btn-calendar"
-            onClick={() => {
-              setMonth(months[month.id + 1]);
-            }}
-          >
-            <p>Próximo</p>
-            <FiArrowRight />
-          </button>
-        )}
+        <div className="flex items-center justify-center p-2">
+          <p className="text-sm font-light">
+            correspondente ao mês de {month.name} de {currentYear}
+          </p>
+        </div>
       </div>
     </div>
   );

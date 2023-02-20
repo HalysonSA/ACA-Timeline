@@ -6,22 +6,30 @@ module.exports = {
   ],
   theme: {
     extend: {
+      rotate: {
+        '30': '30deg',
+      },
       minHeight: {
         'min': '54rem',
+        
+        'calendar' : '500px'
       },
       maxHeight: {
         'max': '54rem',
       },
       maxWidth: {
         'max': '34rem',
-        'calendar': '600px'
       },
       minWidth: {
         'min': '90%',
       },
+      width: {
+        
+        'calendar': '700px'
+      },
       height: {
         'screen/2': '50vh',
-        'screen-3/4': '75vh'
+        'screen-3/4': '75vh',
       },
       fontFamily:{
         'Roboto': ['Roboto', 'sans-serif'],

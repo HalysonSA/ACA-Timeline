@@ -15,15 +15,14 @@ export default function HomePage({ userCookie }: { userCookie: User }) {
   dispatch(checkUserState(userCookie));
 
   return (
-    <div className="min-w-screen min-h-screen bg-teal-50">
+    <div className="min-h-screen min-w-screen bg-cyan-900">
       <Navbar />
-      <div className="md:min-h-screen w-screen flex flex-col  items-center">
-        <div className="overflow-x-auto max-w-calendar flex flex-col gap-8 min-h-screen  w-full h-auto select-none mt-20 ">
-          <CalendarCheck />
-          <SchedulesToday />
-          <BookingForm />
-          <MySchedules />
-        </div>
+      <div className="flex flex-col items-center w-screen md:min-h-screen">
+        <CalendarCheck />
+
+        <SchedulesToday />
+        <BookingForm />
+        <MySchedules />
       </div>
       <Footer />
     </div>
