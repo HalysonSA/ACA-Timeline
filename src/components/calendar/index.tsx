@@ -73,10 +73,10 @@ const CalendarCheck = () => {
 
     dispatch(setScheduling(data));
   }
-  console.log(months[11]);
+
   return (
-    <div className="flex justify-center overflow-auto bg-white md:w-calendar min-h-calendar rounded-3xl">
-      <div className="flex flex-col">
+    <div className="flex justify-center mx-2 overflow-auto bg-white md:mx-0 md:w-calendar min-h-calendar rounded-3xl drop-shadow-home">
+      <div className="flex flex-col ">
         <div className="flex flex-row items-center justify-between">
           <div className="flex flex-row items-center gap-2 my-7">
             <button
