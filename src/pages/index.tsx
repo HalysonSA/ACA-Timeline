@@ -17,7 +17,7 @@ export default function HomePage({ userCookie }: { userCookie: User }) {
   return (
     <div className="min-h-screen select-none min-w-screen bg-cyan-900">
       <Navbar />
-      <div className="flex flex-col items-center justify-center min-h-screen-3/4">
+      <div className="flex flex-col items-center justify-center ">
         <CalendarCheck />
         <button
           onClick={() => {

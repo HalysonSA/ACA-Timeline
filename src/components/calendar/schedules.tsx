@@ -31,34 +31,24 @@ const SchedulesToday = () => {
     return schedules.every((schedule) => schedule.time !== times);
   });
   return (
-    <div className="text-center bg-cyan-700 text-white px-4 rounded-2xl  mx-2 overflow-y-scroll h-96">
-      <div className="sticky top-0 bg-cyan-700">
-        <h1 className="font-bold text-xl p-2 ">Agendamentos do dia </h1>
-
-        {isWeekend}
-      </div>
+    <div className=" text-white px-4 rounded-2xl mx-2 overflow-y-scroll max-h-[42em]">
       {schedules.map((schedule: Scheduling) => {
         const { date, time, status } = schedule;
         const dateFormated = moment(date).format('DD/MM/YYYY');
         return (
           <div
-            className={` flex justify-between flex-wrap-reverse my-2 px-10 rounded-xl  cursor-pointer
+            className={` flex justify-between items-center flex-wrap-reverse px-5 my-2  h-[70px] rounded-[20px]  cursor-pointer
             
-            ${
-              status == 'available'
-                ? 'bg-cyan-500 hover:bg-cyan-600'
-                : 'bg-red-400 hover:bg-red-500'
-            }
-            bg-cyan-500  font-medium`}
+            ${status == 'available' ? 'bg-cyan-500' : 'bg-rose-600 '}
+            `}
             key={schedule.id}
           >
-            <div className="flex flex-row gap-x-1 p-3">
-              <MdTimer size={24} />
+            <div className="flex flex-row gap-x-1  text-xl font-medium">
+              <MdTimer size={30} />
               <p>{time}</p>
             </div>
-            <p className="p-3">{dateFormated}</p>
-            <p className="p-3">
-              {status == 'available' ? 'Disponível' : 'Reservado'}
+            <p className="">
+              {status == 'available' ? 'Disponível' : 'Indisponível'}
             </p>
           </div>
         );
@@ -66,19 +56,16 @@ const SchedulesToday = () => {
       {freeSchedules.map((time) => {
         return (
           <div
-            className={`flex justify-between flex-wrap-reverse cursor-pointer my-2 px-10  rounded-xl ${
-              isWeekend
-                ? 'bg-red-400 hover:bg-red-500'
-                : 'bg-cyan-500 hover:bg-cyan-600'
-            }  font-medium`}
+            className={`flex justify-between items-center flex-wrap-reverse cursor-pointer my-2 px-5  h-[70px] rounded-[20px]   ${
+              isWeekend ? 'bg-rose-600 ' : 'bg-cyan-500 '
+            }  `}
             key={time}
           >
-            <div className="flex flex-row gap-x-1 p-3">
-              <MdTimer size={24} />
+            <div className="flex flex-row gap-x-1 font-medium text-xl ">
+              <MdTimer size={30} />
               <p>{time}</p>
             </div>
-            <p className="p-3">{date}</p>
-            <p className="p-3">{isWeekend ? 'Fim de semana' : 'Disponível'}</p>
+            <p>{isWeekend ? 'Fim de semana' : 'Disponível'}</p>
           </div>
         );
       })}
