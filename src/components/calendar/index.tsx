@@ -75,11 +75,23 @@ const CalendarCheck = () => {
     dispatch(setScheduling(data));
   }
 
+  const CalendarDay = ({ day }: { day: string }) => {
+    return (
+      <th
+        className={`px-4 py-2 text-sm font-medium tracking-wider text-center uppercase bg-gray-100 border border-gray-200 ${
+          day === 'Dom' || day === 'Sáb' ? 'text-red-500' : 'text-gray-500'
+        }`}
+      >
+        {day}
+      </th>
+    );
+  };
+
   return (
-    <div className="flex justify-center mx-2 overflow-auto bg-white md:mx-0 md:w-calendar min-h-calendar rounded-3xl drop-shadow-home">
-      <div className="flex flex-col ">
-        <div className="flex flex-row items-center justify-between">
-          <div className="flex flex-row items-center gap-2 my-7">
+    <div className="calendar-size">
+      <div className="flex flex-col w-full">
+        <div className="flex flex-row items-center justify-between p-2">
+          <div className="flex flex-row items-center gap-6 my-7 ">
             <button
               onClick={() => {
                 if (month.id == 0) {
@@ -107,35 +119,83 @@ const CalendarCheck = () => {
               <MdKeyboardArrowRight size={30} className="bg-white " />
             </button>
           </div>
-          <div className="flex flex-row items-center gap-1">
-            <GiClick size={24} className="rotate-30 " />
-            <p className="font-light ">
-              clique sobre o dia para ver os horários
-            </p>
+          <div className="flex flex-row items-center invisible gap-2 font-light md:visible ">
+            <GiClick size={20} className="rotate-30 " />
+            <p>clique sobre o dia para ver os horários</p>
           </div>
         </div>
-        <div className="grid w-full grid-cols-7 gap-6">
-          {Array.from({ length: month.days }, (_, i) => i + 1).map((day) => {
-            return (
-              <button
-                key={day}
-                className="flex items-center justify-center w-12 h-12 text-3xl font-medium bg-white border border-gray-200 md:w-16 md:h-16 hover:drop-shadow-xl"
-                onClick={() => {
-                  getApointments(day);
-                  dispatch(
-                    setModalState({
-                      isModalOpen: true,
-                      modalType: 'scheduleSchedules',
-                    })
-                  );
-                }}
-              >
-                {day}
-              </button>
-            );
-          })}
-        </div>
-        <div className="flex items-center justify-center p-2">
+        <table>
+          <thead>
+            <tr>
+              <CalendarDay day="Dom" />
+              <CalendarDay day="Seg" />
+              <CalendarDay day="Ter" />
+              <CalendarDay day="Qua" />
+              <CalendarDay day="Qui" />
+              <CalendarDay day="Sex" />
+              <CalendarDay day="Sáb" />
+            </tr>
+          </thead>
+          <tbody>
+            {month.id !== undefined && (
+              <>
+                {[
+                  ...Array(
+                    //to calculate how many rows are needed to show all days of the month,
+                    //taking into account the number of days in the month and the day of the week on which the first day of the month falls.
+                    Math.ceil(
+                      (month.days + moment(month.name, 'MMMM').day()) / 7
+                    )
+                  ),
+                ].map((_, rowIndex) => (
+                  <tr key={rowIndex}>
+                    {[...Array(7)].map((_, cellIndex) => {
+                      //prettier-ignore
+                      const dayOfMonth = rowIndex * 7 + cellIndex - moment(month.name, 'MMMM').day() + 1;
+
+                      const cellIsEmpty =
+                        dayOfMonth < 1 || dayOfMonth > month.days;
+                      return (
+                        <td
+                          key={cellIndex}
+                          {...(!cellIsEmpty && {
+                            onClick: () => {
+                              getApointments(dayOfMonth);
+                              dispatch(
+                                setModalState({
+                                  isModalOpen: true,
+                                  modalType: 'scheduleSchedules',
+                                })
+                              );
+                            },
+                          })}
+                          className={`cursor-pointer  px-4 py-2 text-sm text-center hover:bg-neutral-200 text-gray-500 border border-gray-200  ${
+                            cellIsEmpty ? 'bg-gray-100' : ''
+                          }
+                          ${
+                            dayOfMonth === moment().date() &&
+                            month.id === moment().month()
+                              ? 'bg-orange-100'
+                              : ''
+                          }
+                          
+                          `}
+                        >
+                          {!cellIsEmpty && dayOfMonth}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                ))}
+              </>
+            )}
+          </tbody>
+        </table>
+        <div className="flex flex-col items-center justify-center h-full p-2">
+          <div className="flex flex-row gap-2 md:invisible">
+            <GiClick size={24} className="rotate-30 " />
+            <p>Toque sobre o dia para ver os horários</p>
+          </div>
           <p className="text-sm font-light">
             correspondente ao mês de {month.name} de {currentYear}
           </p>

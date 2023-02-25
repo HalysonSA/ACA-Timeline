@@ -31,7 +31,7 @@ const SchedulesToday = () => {
     return schedules.every((schedule) => schedule.time !== times);
   });
   return (
-    <div className=" text-white px-4 rounded-2xl mx-2 overflow-y-scroll max-h-[42em]">
+    <div className=" text-white mt-2 md:px-10 rounded-2xl mx-2 overflow-auto max-h-[38em] mb-2">
       {schedules.map((schedule: Scheduling) => {
         const { date, time, status } = schedule;
         const dateFormated = moment(date).format('DD/MM/YYYY');
@@ -43,7 +43,7 @@ const SchedulesToday = () => {
             `}
             key={schedule.id}
           >
-            <div className="flex flex-row gap-x-1  text-xl font-medium">
+            <div className="flex flex-row text-xl font-medium gap-x-1">
               <MdTimer size={30} />
               <p>{time}</p>
             </div>
@@ -61,7 +61,7 @@ const SchedulesToday = () => {
             }  `}
             key={time}
           >
-            <div className="flex flex-row gap-x-1 font-medium text-xl ">
+            <div className="flex flex-row text-xl font-medium gap-x-1 ">
               <MdTimer size={30} />
               <p>{time}</p>
             </div>

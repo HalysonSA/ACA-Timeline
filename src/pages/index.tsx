@@ -15,28 +15,30 @@ export default function HomePage({ userCookie }: { userCookie: User }) {
   dispatch(checkUserState(userCookie));
 
   return (
-    <div className="min-h-screen select-none min-w-screen bg-cyan-900">
-      <Navbar />
-      <div className="flex flex-col items-center justify-center ">
-        <CalendarCheck />
-        <button
-          onClick={() => {
-            dispatch(
-              setModalState({
-                isModalOpen: true,
-                modalType: 'scheduleCreation',
-              })
-            );
-          }}
-          className="h-16 p-3 my-8 text-xl font-medium bg-white rounded-full w-72 drop-shadow-home hover:bg-neutral-100"
-        >
-          Fazer Agendamento
-        </button>
-        <ModalScheduleCreation />
-        <ModalSchedules />
+    <>
+      <ModalSchedules />
+      <ModalScheduleCreation />
+      <div className="min-h-screen select-none min-w-screen bg-cyan-900">
+        <Navbar />
+        <div className="flex flex-col items-center justify-center ">
+          <CalendarCheck />
+          <button
+            onClick={() => {
+              dispatch(
+                setModalState({
+                  isModalOpen: true,
+                  modalType: 'scheduleCreation',
+                })
+              );
+            }}
+            className="w-3/4 h-16 p-3 my-8 text-xl font-medium bg-white rounded-full md:w-72 drop-shadow-home hover:bg-neutral-100"
+          >
+            Fazer Agendamento
+          </button>
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </>
   );
 }
 

@@ -17,11 +17,18 @@ body {
   overflow-x: hidden;
 }
 
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
 
 a {
   color: inherit;
   text-decoration: none;
 }
+
 
 @layer components {
   .th-theme {
@@ -35,7 +42,13 @@ a {
   }
 
   .modal-size{
-    @apply md:w-modal md:h-modal bg-white rounded-3xl
+    @apply w-full md:w-modal h-[100%] md:h-modal bg-white md:rounded-3xl top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 fixed z-50 ;
   }
+
+  .calendar-size{
+    @apply flex justify-center  bg-white w-full  md:w-calendar min-h-calendar rounded-3xl drop-shadow-home overflow-x-scroll md:overflow-hidden
+  }
+
+
  
 }
