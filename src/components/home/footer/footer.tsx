@@ -1,22 +1,22 @@
 import Link from 'next/link';
-import { FaFacebookF, FaWhatsapp, FaInstagram } from 'react-icons/fa';
+import { FaWhatsapp, FaLinkedin, FaGithub } from 'react-icons/fa';
 
 export default function Footer() {
   const btnSocialMedia = [
     {
-      name: 'Facebook',
-      href: 'https://www.facebook.com/#/',
-      icon: <FaFacebookF size={24} className="text-white" />,
+      name: 'Github',
+      href: 'https://github.com/HalysonSA',
+      icon: <FaGithub size={24} className="text-white" />,
     },
     {
       name: 'Whatsapp',
-      href: 'https://api.whatsapp.com/send?phone=5511999999999',
+      href: 'https://api.whatsapp.com/send?phone=5584999743434&text=Ol%C3%A1!%20Gostaria%20de%20fazer%20um%20agendamento',
       icon: <FaWhatsapp size={24} className="text-white" />,
     },
     {
-      name: 'Instagram',
-      href: 'https://www.instagram.com/#/',
-      icon: <FaInstagram size={24} className="text-white" />,
+      name: 'Linkedin',
+      href: 'https://www.linkedin.com/in/halysonsa/',
+      icon: <FaLinkedin size={24} className="text-white" />,
     },
   ];
 
