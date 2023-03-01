@@ -8,11 +8,13 @@ import { User } from '@/types/users';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { RiAccountCircleFill } from 'react-icons/ri';
 import { useMediaQuery } from '@chakra-ui/react';
+import { ImSpinner2 } from 'react-icons/Im';
 
 export default function SignInForm() {
   const [rememberMe, setRememberMe] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [findedUser, setFindedUser] = useState<undefined | string>('na');
+  const [isLoading, setIsLoading] = useState(false);
 
   const [isLargerThan768] = useMediaQuery('(min-width: 768px)');
 
@@ -55,6 +57,8 @@ export default function SignInForm() {
   }, [errors.email, errors.password]);
 
   const onSubmit: SubmitHandler<InputsLogin> = async ({ email, password }) => {
+    setIsLoading(true);
+
     const { data, error } = await supabase
       .from('users')
       .select()
@@ -67,11 +71,14 @@ export default function SignInForm() {
         setTimeout(function () {
           setFindedUser('na');
         }, 3000);
+        setIsLoading(false);
       } else {
         const user: User = data[0];
 
         setFindedUser(user.username);
         setCookie('user', data[0], { path: '/', maxAge: 24 * 60 * 60 });
+
+        setIsLoading(false);
 
         switch (data[0].role) {
           case 'admin':
@@ -164,7 +171,13 @@ export default function SignInForm() {
           type="submit"
           className="flex items-center justify-center w-full h-12 text-xl text-white transition-all bg-cyan-600 hover:bg-cyan-700 "
         >
-          Entrar
+          {isLoading ? (
+            <span className="animate-spin">
+              <ImSpinner2 />
+            </span>
+          ) : (
+            'Entrar'
+          )}
         </button>
         {findedUser === undefined && (
           <span className="text-red-500">Usuário ou senha incorretos </span>
