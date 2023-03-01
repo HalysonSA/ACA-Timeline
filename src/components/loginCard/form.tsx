@@ -8,7 +8,7 @@ import { User } from '@/types/users';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { RiAccountCircleFill } from 'react-icons/ri';
 import { useMediaQuery } from '@chakra-ui/react';
-import { ImSpinner2 } from 'react-icons/Im';
+import { ImSpinner2 } from 'react-icons/im';
 
 export default function SignInForm() {
   const [rememberMe, setRememberMe] = useState(false);
