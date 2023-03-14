@@ -3,6 +3,7 @@ import RootState from '@/types/reduxStates';
 import { IoClose } from 'react-icons/io5';
 import { useDispatch, useSelector } from 'react-redux';
 import ScheduleForm from '../scheduleForm';
+import { ToastContainer } from 'react-toastify';
 
 const ModalScheduleCreation = () => {
   const modal = useSelector((state: RootState) => state.isModalOpen);
@@ -13,6 +14,7 @@ const ModalScheduleCreation = () => {
 
   return (
     <>
+      <ToastContainer />
       <div
         onClick={() => {
           dispatch(

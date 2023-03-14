@@ -6,7 +6,7 @@ import VerifyWeekend from '@/utils/verifyWeekend';
 import VerifySchedules from '@/utils/verifySchedules';
 
 import 'react-toastify/dist/ReactToastify.css';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
 
 type Service = {
@@ -90,8 +90,6 @@ export default function ScheduleForm() {
 
   return (
     <div>
-      <ToastContainer />
-
       <div className="flex flex-col mx-2 md:px-10 gap-y-2">
         <div className="flex flex-col mt-2 max-h-[450px] gap-y-4 overflow-auto">
           <div className="flex flex-col gap-2 ">
