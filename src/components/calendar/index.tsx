@@ -152,7 +152,6 @@ const CalendarCheck = () => {
                     {[...Array(7)].map((_, cellIndex) => {
                       //prettier-ignore
                       const dayOfMonth = rowIndex * 7 + cellIndex - moment(month.name, 'MMMM').day() + 1;
-
                       const cellIsEmpty =
                         dayOfMonth < 1 || dayOfMonth > month.days;
                       return (
@@ -160,6 +159,15 @@ const CalendarCheck = () => {
                           key={cellIndex}
                           {...(!cellIsEmpty && {
                             onClick: () => {
+                              if (month.id < currentMonth) {
+                                return;
+                              } else if (
+                                dayOfMonth < moment().date() &&
+                                month.id === currentMonth
+                              ) {
+                                return;
+                              }
+
                               getApointments(dayOfMonth);
                               dispatch(
                                 setModalState({
@@ -169,14 +177,22 @@ const CalendarCheck = () => {
                               );
                             },
                           })}
-                          className={`cursor-pointer  px-4 py-2 text-sm text-center hover:bg-neutral-200 text-gray-500 border border-gray-200  ${
-                            cellIsEmpty ? 'bg-gray-100' : ''
-                          }
+                          className={`cursor-pointer  px-4 py-2 text-sm text-center hover:bg-neutral-200 text-gray-500 border border-gray-200 ${
+                            month.id < currentMonth &&
+                            !cellIsEmpty &&
+                            'bg-red-200 cursor-not-allowed'
+                          } 
+                           ${cellIsEmpty && 'bg-gray-100 cursor-not-allowed'}
                           ${
                             dayOfMonth === moment().date() &&
-                            month.id === moment().month()
-                              ? 'bg-orange-100'
-                              : ''
+                            month.id === currentMonth &&
+                            'bg-orange-100'
+                          }
+                          ${
+                            dayOfMonth < moment().date() &&
+                            month.id === currentMonth &&
+                            !cellIsEmpty &&
+                            'bg-red-200 cursor-not-allowed'
                           }
                           
                           `}
