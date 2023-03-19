@@ -49,6 +49,9 @@ a {
     @apply flex justify-center  bg-white w-full  md:w-calendar min-h-calendar rounded-3xl drop-shadow-home overflow-x-scroll md:overflow-hidden
   }
 
+    .card-admin{
+      @apply h-[200px] w-[300px] rounded-xl bg-white text-2xl p-2 drop-shadow-home flex flex-col justify-between hover:bg-slate-200 ease-linear transition-all duration-100 cursor-pointer ;
+    }
 
  
 }

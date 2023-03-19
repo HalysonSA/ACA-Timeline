@@ -4,76 +4,51 @@ import { checkUserState } from '@/redux/userSlice';
 import { User } from '@/types/users';
 import cookie from 'cookie';
 import { useDispatch } from 'react-redux';
-import { supabase } from '@/lib/supabaseClient';
-import { useEffect, useState } from 'react';
+import { BiArrowToRight } from 'react-icons/bi';
+import { BsFillCalendarWeekFill } from 'react-icons/bs';
+import { MdWork } from 'react-icons/md';
+import { FaUserFriends } from 'react-icons/fa';
 
 export default function AdminPage({ userCookie }: { userCookie: User }) {
   const dispatch = useDispatch();
 
   dispatch(checkUserState(userCookie));
 
-  interface ISchedule {
-    time: string;
-    status: string;
-    user: {
-      name: string;
-      email: string;
-    };
-    service: {
-      title: string;
-      price: number;
-    };
-  }
-
-  const [schedules, setSchedules] = useState<ISchedule[]>([]);
-
-  useEffect(() => {
-    const handleSchedules = async () => {
-      const response = await supabase
-        .from('schedules')
-        .select(
-          `time,
-          status,
-          user:user_id (name, email),
-          service:service_id (title, price)
-          `
-        )
-        .eq('date', `${new Date().toISOString().split('T')[0]}`);
-
-      response.data && setSchedules(response.data);
-    };
-    handleSchedules();
-  }, []);
-
   return (
-    <div className="flex flex-col bg-cyan-600 min-h-[100vh] ">
+    <div className="flex flex-col bg-cyan-600 min-h-screen ">
       <Navbar />
-      <div className="md:w-11/12">
-        <table>
-          <tbody>
-            <th>
-              <td>Horário</td>
-              <td>Cliente</td>
-              <td>Serviço</td>
-              <td>Preço</td>
-              <td>Status</td>
-            </th>
-            {schedules.map((schedule: ISchedule) => {
-              return (
-                <tr key={schedule.time}>
-                  <td>{schedule.time}</td>
-                  <td>{schedule.user.name}</td>
-                  <td>{schedule.service.title}</td>
-                  <td>{schedule.service.price}</td>
-                  <td>{schedule.status}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-        <div className="flex flex-col items-center justify-center"></div>
+      <div className="flex items-center justify-center ">
+        <div className="flex flex-row flex-wrap gap-10  w-11/12 md:w-8/12 justify-center font-medium  ">
+          <div className="card-admin">
+            <span className="flex flex-row items-center gap-2">
+              <FaUserFriends size={24} />
+              <h1 className="text-2xl">Clientes</h1>
+            </span>
+            <span className="flex flex-row justify-end">
+              <BiArrowToRight size={30} />
+            </span>
+          </div>
+          <div className="card-admin">
+            <span className="flex flex-row items-center gap-2">
+              <MdWork size={24} />
+              <h1 className="text-2xl">Serviços</h1>
+            </span>
+            <span className="flex flex-row justify-end">
+              <BiArrowToRight size={30} />
+            </span>
+          </div>
+          <div className="card-admin">
+            <span className="flex flex-row items-center gap-2">
+              <BsFillCalendarWeekFill size={24} />
+              <h1 className="text-2xl">Agendamentos</h1>
+            </span>
+            <span className="flex flex-row justify-end">
+              <BiArrowToRight size={30} />
+            </span>
+          </div>
+        </div>
       </div>
-      <div className="flex absolute bottom-0 w-full">
+      <div className="md:absolute bottom-0 w-screen">
         <Footer />
       </div>
     </div>
