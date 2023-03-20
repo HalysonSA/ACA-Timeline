@@ -8,6 +8,7 @@ import { BiArrowToRight } from 'react-icons/bi';
 import { BsFillCalendarWeekFill } from 'react-icons/bs';
 import { MdWork } from 'react-icons/md';
 import { FaUserFriends } from 'react-icons/fa';
+import Link from 'next/link';
 
 export default function AdminPage({ userCookie }: { userCookie: User }) {
   const dispatch = useDispatch();
@@ -15,11 +16,11 @@ export default function AdminPage({ userCookie }: { userCookie: User }) {
   dispatch(checkUserState(userCookie));
 
   return (
-    <div className="flex flex-col bg-cyan-600 min-h-screen ">
+    <div className="flex flex-col min-h-screen bg-cyan-600 ">
       <Navbar />
       <div className="flex items-center justify-center ">
-        <div className="flex flex-row flex-wrap gap-10  w-11/12 md:w-8/12 justify-center font-medium  ">
-          <div className="card-admin">
+        <div className="flex flex-row flex-wrap justify-center w-11/12 gap-10 font-medium md:w-8/12 ">
+          <Link href="/admin/customers" className="card-admin">
             <span className="flex flex-row items-center gap-2">
               <FaUserFriends size={24} />
               <h1 className="text-2xl">Clientes</h1>
@@ -27,8 +28,8 @@ export default function AdminPage({ userCookie }: { userCookie: User }) {
             <span className="flex flex-row justify-end">
               <BiArrowToRight size={30} />
             </span>
-          </div>
-          <div className="card-admin">
+          </Link>
+          <Link href="/admin/services" className="card-admin">
             <span className="flex flex-row items-center gap-2">
               <MdWork size={24} />
               <h1 className="text-2xl">Serviços</h1>
@@ -36,8 +37,8 @@ export default function AdminPage({ userCookie }: { userCookie: User }) {
             <span className="flex flex-row justify-end">
               <BiArrowToRight size={30} />
             </span>
-          </div>
-          <div className="card-admin">
+          </Link>
+          <Link href="/admin/schedules" className="card-admin">
             <span className="flex flex-row items-center gap-2">
               <BsFillCalendarWeekFill size={24} />
               <h1 className="text-2xl">Agendamentos</h1>
@@ -45,10 +46,10 @@ export default function AdminPage({ userCookie }: { userCookie: User }) {
             <span className="flex flex-row justify-end">
               <BiArrowToRight size={30} />
             </span>
-          </div>
+          </Link>
         </div>
       </div>
-      <div className="md:absolute bottom-0 w-screen">
+      <div className="bottom-0 w-screen md:absolute">
         <Footer />
       </div>
     </div>

@@ -10,6 +10,39 @@
   margin: 0;
 }
 
+.table-admin table, th, td {
+  
+  border: 1px solid black;
+}
+
+.table-admin  table {
+  border-collapse: collapse;
+  margin: auto;
+  }
+
+.table-admin  th, td{
+  padding: 10px;
+  text-align: center;
+  min-width: 160px;
+  }
+  
+ .table-admin th{
+  font-weight: bold;
+  color: white;
+  background: #0e7490;
+  }
+  
+ .table-admin tr {
+  background-color: #f2f2f2;
+  user-select: none;
+  }
+ .table-admin tr:nth-child(even) {
+    background-color: white;
+    }
+  .table-admin  tr:hover{
+      background-color: #ddd;
+      cursor: pointer;
+    }
 html,
 body {
   min-height: 100vh;
