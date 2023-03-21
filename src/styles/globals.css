@@ -20,7 +20,12 @@
   margin: auto;
   }
 
-.table-admin  th, td{
+.table-admin td{
+  padding: 10px;
+  text-align: center;
+  min-width: 160px;
+  }
+.table-admin th{
   padding: 10px;
   text-align: center;
   min-width: 160px;

@@ -16,11 +16,14 @@ export default function Navbar() {
   return (
     <nav className="flex flex-row justify-center w-full select-none h-28">
       <div className="flex flex-row items-center justify-between w-full px-6 text-white max-w-screen-2xl">
-        <span className="flex flex-row items-center gap-2">
+        <span className="flex flex-row items-center gap-4 flex-wrap">
           <FaUserCircle size={30} />
           <label className="text-xl ">
             <b>Olá,</b> {user.username}
           </label>
+          {user.role === 'admin' && (
+            <Link href="/admin">Página de Administração</Link>
+          )}
         </span>
         <Link
           href="/login"
